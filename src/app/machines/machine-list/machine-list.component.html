@@ -1,0 +1,83 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<div
+  class="example-container mat-elevation-z8"
+  *ngIf="machines.length > 0 && !isLoading"
+>
+  <mat-table #table [dataSource]="machines">
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> Machine ID </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.id }} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Machine Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.name }} </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="type">
+      <mat-header-cell *matHeaderCellDef> Machine Type </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.type }} </mat-cell>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="signal">
+      <mat-header-cell *matHeaderCellDef> Signal Type </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.signal }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="angSignal">
+      <mat-header-cell *matHeaderCellDef> Analog Signal </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.angSignal }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="modbus">
+      <mat-header-cell *matHeaderCellDef> Modbus </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.modbus }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-icon-button class="edit-button" (click)="onEdit(row.id)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="onDelete(row.id)">
+          <mat-icon>delete_outline</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+  <mat-paginator
+    [pageSize]="1"
+    [pageSizeOptions]="[1, 5, 10]"
+    [showFirstLastButtons]="true"
+  >
+  </mat-paginator>
+</div>
+<div class="btn-row">
+  <button color="primary" mat-raised-button (click)="onAddItem()">
+    <mat-icon>add</mat-icon>
+    Add
+  </button>
+  <button color="primary" mat-raised-button (click)="showPopup()">
+    <mat-icon>file_upload</mat-icon>
+    Import file
+  </button>
+
+  <!-- <button color="primary" mat-raised-button (click)="fileUpload.click()">
+      <mat-icon>file_upload</mat-icon>
+      Upload
+    </button>
+    <input type="file" #fileUpload accept=".csv" /> -->
+</div>
+
+<h1 *ngIf="machines.length <= 0 && !isLoading">No machines added yet!</h1>
