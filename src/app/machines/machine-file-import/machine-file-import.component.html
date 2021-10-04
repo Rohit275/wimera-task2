@@ -1,8 +1,15 @@
 <h1 mat-dialog-title>Import the file</h1>
 <mat-dialog-content>
-  <input type="file" />
+  <input
+    type="file"
+    #fileImportInput
+    name="File Upload"
+    id="csvFileUpload"
+    (change)="fileChangeListener($event)"
+    accept=".csv"
+  />
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button>Install</button>
+  <button mat-button mat-dialog-close color="warn">Cancel</button>
+  <button mat-button color="primary" (click)="onAddFile()">Import</button>
 </mat-dialog-actions>

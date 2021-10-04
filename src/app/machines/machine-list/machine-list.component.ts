@@ -29,10 +29,10 @@ export class MachineListComponent implements OnInit {
   ELEMENT_DATA: Machine[] = [];
   dataSource = new MatTableDataSource<Machine>(this.ELEMENT_DATA);
   // @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild(MatPaginator, { static: false })
-  set paginator(v: MatPaginator) {
-    this.dataSource.paginator = v;
-  }
+  // @ViewChild(MatPaginator, { static: false })
+  // set paginator(v: MatPaginator) {
+  //   this.dataSource.paginator = v;
+  // }
 
   machines: Machine[] = [];
   isLoading: boolean = false;
@@ -60,10 +60,10 @@ export class MachineListComponent implements OnInit {
         //   this.dataSource.paginator
         // );
       });
-    this.getAllMachines();
+    // this.getAllMachines();
     // this.dataSource.paginator = this.paginator;
     // this.dataSource = new MatTableDataSource(this.machines);
-    setTimeout(() => (this.dataSource.paginator = this.paginator));
+    // setTimeout(() => (this.dataSource.paginator = this.paginator));
   }
 
   public getAllMachines() {

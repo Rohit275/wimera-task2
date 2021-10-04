@@ -12,6 +12,11 @@ export class MachineService {
   private machines: Machine[] = [];
   private machinesUpdated = new Subject<Machine[]>();
   private editId;
+  config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
 
   constructor(private http: HttpClient, public router: Router) {}
 
@@ -48,6 +53,19 @@ export class MachineService {
 
   getMachineUpdateListener() {
     return this.machinesUpdated.asObservable();
+  }
+
+  importCsv(csvData) {
+    this.http
+      .post<{ message: string }>(
+        'http://localhost:3000/api/csvdata',
+        csvData,
+        this.config
+      )
+      .subscribe((respData) => {
+        console.log(respData.message);
+        this.machinesUpdated.next([...this.machines]);
+      });
   }
 
   postId(id: string) {

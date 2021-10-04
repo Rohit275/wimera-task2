@@ -1,6 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const CSV = require("./models/csv");
+const Machine = require("./models/machine");
 
 const machineRoutes = require("./routes/machine");
 
@@ -28,5 +30,38 @@ app.use((req, res, next) => {
 });
 
 app.use("/api/machines", machineRoutes);
+
+// router.post("/", (req, res, next) => {
+//   let machine = new Machine({
+//     name: req.body.name,
+//     type: req.body.type,
+//     signal: req.body.signal,
+//     angSignal: req.body.angSignal,
+//     modbus: req.body.modbus,
+//   });
+
+//   machine.save().then((createdMachine) => {
+//     console.log(createdMachine);
+//     res.status(201).json({
+//       message: "Machine added succesfully!",
+//       machineId: createdMachine._id,
+//     });
+//   });
+// });
+
+app.post("/api/csvdata", (req, res) => {
+  const data = req.body;
+  Machine.insertMany(data, (err, data) => {
+    if (err) {
+      res.status(400).json({
+        message: "There is some error to Uploading CSV!",
+      });
+    } else {
+      res.status(200).json({
+        message: "File Uploaded Successfully!",
+      });
+    }
+  });
+});
 
 module.exports = app;
