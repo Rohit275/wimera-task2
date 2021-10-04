@@ -1,5 +1,7 @@
-<h1 mat-dialog-title>Import the file</h1>
-<mat-dialog-content>
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<div *ngIf="!isLoading">
+  <h1 mat-dialog-title>Import the file</h1>
+  <!-- <mat-dialog-content> -->
   <input
     type="file"
     #fileImportInput
@@ -8,8 +10,9 @@
     (change)="fileChangeListener($event)"
     accept=".csv"
   />
-</mat-dialog-content>
-<mat-dialog-actions align="end">
+  <!-- </mat-dialog-content> -->
+  <!-- <mat-dialog-actions align="end"> -->
   <button mat-button mat-dialog-close color="warn">Cancel</button>
   <button mat-button color="primary" (click)="onAddFile()">Import</button>
-</mat-dialog-actions>
+  <!-- </mat-dialog-actions> -->
+</div>

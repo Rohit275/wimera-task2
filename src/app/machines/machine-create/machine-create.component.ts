@@ -14,7 +14,7 @@ export class MachineCreateComponent implements OnInit {
     { id: 'Analog', value: 'Analog' },
     { id: 'Standard', value: 'Standard' },
   ];
-  public isLoading = false;
+  public isLoading: boolean = false;
   constructor(
     public machineService: MachineService,
     public dialogRef: MatDialogRef<MachineCreateComponent>

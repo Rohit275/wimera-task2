@@ -4,6 +4,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { MachineListComponent } from './machines/machine-list/machine-list.component';
 
 const routes: Routes = [
+  { path: '', component: MachineListComponent },
   { path: 'machine', component: MachineListComponent },
   { path: 'dashboard', component: DashboardComponent },
 ];

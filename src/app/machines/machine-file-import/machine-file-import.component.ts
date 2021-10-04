@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 import { NgxCsvParser, NgxCSVParserError } from 'ngx-csv-parser';
 import { CsvModel } from '../csv.model';
 import { MachineService } from '../machine.service';
@@ -11,11 +12,13 @@ import { MachineService } from '../machine.service';
 export class MachineFileImportComponent implements OnInit {
   header: boolean = true;
   loading: boolean = true;
+  isLoading: boolean = false;
   csvRecords: CsvModel[] = [];
 
   constructor(
     private ngxCsvParser: NgxCsvParser,
-    public machineService: MachineService
+    public machineService: MachineService,
+    public dialogRef: MatDialogRef<MachineFileImportComponent>
   ) {}
 
   ngOnInit(): void {}
@@ -45,10 +48,15 @@ export class MachineFileImportComponent implements OnInit {
   }
 
   onAddFile() {
-    this.machineService.importCsv(this.csvRecords);
-    setTimeout(() => {
-      // this.loading = true;
-      this.machineService.getMachines();
-    }, 1000);
+    if (this.csvRecords.length > 0) {
+      this.machineService.importCsv(this.csvRecords);
+      setTimeout(() => {
+        this.isLoading = true;
+        this.machineService.getMachines();
+        this.dialogRef.close();
+      }, 1000);
+      this.isLoading = false;
+    }
+    console.log('CSV: ', this.csvRecords);
   }
 }

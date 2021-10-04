@@ -83,8 +83,11 @@ export class MachineListComponent implements OnInit {
   // }
 
   showPopup() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
     this.isVisible = true;
-    const dialogRef = this.dialog.open(MachineFileImportComponent);
+    this.dialog.open(MachineFileImportComponent);
   }
 
   onAddItem() {
