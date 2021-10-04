@@ -58,7 +58,7 @@ export class MachineService {
   importCsv(csvData) {
     this.http
       .post<{ message: string }>(
-        'http://localhost:3000/api/csvdata',
+        'http://localhost:3000/api/machines/import',
         csvData,
         this.config
       )

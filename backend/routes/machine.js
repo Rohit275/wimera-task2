@@ -41,6 +41,21 @@ router.post("/", (req, res, next) => {
   });
 });
 
+router.post("/import", (req, res) => {
+  const data = req.body;
+  Machine.insertMany(data, (err, data) => {
+    if (err) {
+      res.status(400).json({
+        message: "There is some error to Uploading CSV!",
+      });
+    } else {
+      res.status(200).json({
+        message: "File Uploaded Successfully!",
+      });
+    }
+  });
+});
+
 router.put("/:id", (req, res, next) => {
   const machine = new Machine({
     _id: req.body.id,
