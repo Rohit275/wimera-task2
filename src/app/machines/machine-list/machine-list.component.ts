@@ -18,7 +18,6 @@ import { MachineFileImportComponent } from '../machine-file-import/machine-file-
 })
 export class MachineListComponent implements OnInit {
   displayedColumns = [
-    'id',
     'name',
     'type',
     'signal',
@@ -26,8 +25,17 @@ export class MachineListComponent implements OnInit {
     'modbus',
     'actions',
   ];
-  ELEMENT_DATA: Machine[] = [];
-  dataSource = new MatTableDataSource<Machine>(this.ELEMENT_DATA);
+  // displayedColumns = [
+  //   'id',
+  //   'name',
+  //   'type',
+  //   'signal',
+  //   'angSignal',
+  //   'modbus',
+  //   'actions',
+  // ];
+  // ELEMENT_DATA: Machine[] = [];
+  // dataSource = new MatTableDataSource<Machine>(this.ELEMENT_DATA);
   // @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   // @ViewChild(MatPaginator, { static: false })
   // set paginator(v: MatPaginator) {
@@ -66,13 +74,13 @@ export class MachineListComponent implements OnInit {
     // setTimeout(() => (this.dataSource.paginator = this.paginator));
   }
 
-  public getAllMachines() {
-    let res = this.machineService.getDataMachines();
-    res.subscribe((result) => {
-      this.dataSource.data = result as Machine[];
-    });
-    console.log('getAllMachines  datasource: ', this.dataSource);
-  }
+  // public getAllMachines() {
+  //   let res = this.machineService.getDataMachines();
+  //   res.subscribe((result) => {
+  //     this.dataSource.data = result as Machine[];
+  //   });
+  //   console.log('getAllMachines  datasource: ', this.dataSource);
+  // }
 
   // ngAfterViewInit() {
   // this.dataSource.paginator = this.paginator;
@@ -82,7 +90,7 @@ export class MachineListComponent implements OnInit {
   // console.log('ngAfterViewInit');
   // }
 
-  showPopup() {
+  showDialog() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;

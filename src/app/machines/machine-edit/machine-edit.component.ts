@@ -42,6 +42,7 @@ export class MachineEditComponent implements OnInit {
     if (form.invalid) {
       return;
     }
+    console.log('On Update: ', form.value.angSignal);
     this.machineService.updateMachine(
       this.machineId,
       form.value.name,

@@ -1,11 +1,16 @@
 const express = require("express");
-const Machine = require("../models/machine");
+const mongoose = require("mongoose");
+
+// const Machine = require("../models/machine");
+
+const machineSchema = new mongoose.Schema({}, { strict: false });
+const Machine = mongoose.model("Machine", machineSchema);
 
 const router = express.Router();
 
 router.get("/", (req, res, next) => {
   Machine.find().then((documents) => {
-    console.log(documents);
+    // console.log(documents);
     res.status(200).json({
       message: "Machines fetched successfully!",
       machines: documents,
@@ -61,12 +66,19 @@ router.put("/:id", (req, res, next) => {
     _id: req.body.id,
     name: req.body.name,
     type: req.body.type,
-    signalType: req.body.signalType,
-    analogSignal: req.body.analogSignal,
+    signal: req.body.signal,
+    angSignal: req.body.angSignal,
     modbus: req.body.modbus,
   });
+  // console.log("Before update: ", req.body.signalType);
+  // console.log("Before update: ", req.body.analogSignal);
+  console.log("Before update: ", req.body);
   Machine.updateOne({ _id: req.params.id }, machine).then((result) => {
+    console.log("At update: ", req.body);
+
     console.log(result);
+
+    // console.log(req.body);
     res.status(200).json({ message: "Update succesful!" });
   });
 });

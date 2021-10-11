@@ -9,7 +9,13 @@
   </button>
   Wimera
   <div class="prof">
-    <mat-icon [inline]="true">account_circle</mat-icon>
+    <button
+      mat-icon-button
+      aria-label="Example icon button with a filter list icon"
+    >
+      <!-- <mat-icon>filter_list</mat-icon> -->
+      <mat-icon [inline]="true" class="account">account_circle</mat-icon>
+    </button>
   </div>
 </mat-toolbar>
 
@@ -23,15 +29,30 @@
     <mat-divider></mat-divider>
 
     <div class="sidenav-items">
-      <button mat-button class="menu-button" routerLink="/">
+      <button
+        mat-button
+        class="menu-button"
+        routerLink="/home"
+        routerLinkActive="list-item-active"
+      >
         <mat-icon>home</mat-icon>
         <span>Home</span>
       </button>
-      <button mat-button class="menu-button" routerLink="/dashboard">
+      <button
+        mat-button
+        class="menu-button"
+        routerLink="/dashboard"
+        routerLinkActive="list-item-active"
+      >
         <mat-icon>dashboard</mat-icon>
         <span>Dashboard</span>
       </button>
-      <button mat-button class="menu-button" routerLink="/machine">
+      <button
+        mat-button
+        class="menu-button"
+        routerLink="/machine"
+        routerLinkActive="list-item-active"
+      >
         <mat-icon>list</mat-icon>
         <span>Machines</span>
       </button>

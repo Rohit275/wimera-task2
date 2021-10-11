@@ -134,6 +134,7 @@ export class MachineService {
     this.http
       .put('http://localhost:3000/api/machines/' + id, machine)
       .subscribe((res) => {
+        console.log('At machine update service: ', machine);
         const updatedMachines = [...this.machines];
         const oldMachineIndex = updatedMachines.findIndex(
           (m) => m.id === machine.id

@@ -7,8 +7,10 @@ mat-toolbar {
   align-items: center;
 }
 
-.prof {
-  font-size: 45px;
+mat-icon.account {
+  height: 45px !important;
+  width: 45px !important;
+  font-size: 45px !important;
 }
 
 mat-sidenav {
@@ -68,6 +70,12 @@ mat-sidenav-container {
   margin-top: 2px;
   font-size: 0.7rem;
   color: lightgrey;
+}
+
+.list-item-active {
+  /* color: orange; */
+  background-color: #3855ad;
+  border-left: 5px solid;
 }
 
 mat-divider {
