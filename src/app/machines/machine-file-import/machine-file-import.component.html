@@ -1,18 +1,94 @@
+<!-- Initial one -->
 <mat-spinner *ngIf="isLoading"></mat-spinner>
 <div *ngIf="!isLoading">
-  <h1 mat-dialog-title>Import the file</h1>
-  <!-- <mat-dialog-content> -->
-  <input
-    type="file"
-    #fileImportInput
-    name="File Upload"
-    id="csvFileUpload"
-    (change)="fileChangeListener($event)"
-    accept=".csv"
-  />
-  <!-- </mat-dialog-content> -->
-  <!-- <mat-dialog-actions align="end"> -->
-  <button mat-button mat-dialog-close color="warn">Cancel</button>
-  <button mat-button color="primary" (click)="onAddFile()">Import</button>
-  <!-- </mat-dialog-actions> -->
+  <section class="example-section" [formGroup]="form">
+    <h1 mat-dialog-title>Import the file</h1>
+    <input
+      type="file"
+      #fileImportInput
+      name="File Upload"
+      id="csvFileUpload"
+      (change)="fileChangeListener($event)"
+      accept=".csv"
+    />
+
+    <ng-container *ngIf="isValidFile">
+      <hr />
+
+      <h4>Select the columns to be displayed:</h4>
+      <p *ngFor="let control of checkItem.controls; let i = index">
+        <mat-checkbox
+          [formControl]="control"
+          id="inlineCheckbox{{ i }}"
+          (change)="getSelectedCheckList()"
+          >{{ sampleCheckList[i] }}</mat-checkbox
+        >
+        <mat-select name="type" placeholder="Data Type">
+          <ng-container *ngFor="let type of dataTypes">
+            <mat-option value="{{ type.id }}"> {{ type.value }} </mat-option>
+          </ng-container>
+        </mat-select>
+      </p>
+      <section class="example-section" [formGroup]="form">
+        <h4>You chose:</h4>
+        {{ selectedCheckList | json }}
+      </section>
+      <button mat-raised-button mat-dialog-close color="warn">Cancel</button>
+      <button mat-raised-button color="primary" (click)="onAddFile()">
+        Save & Import
+      </button>
+    </ng-container>
+  </section>
 </div>
+<!-- ----------------------------------------------------------------------------------------- -->
+<!-- Attempt 1 -->
+<!-- <mat-spinner *ngIf="isLoading"></mat-spinner>
+<div *ngIf="!isLoading">
+  <section class="example-section" [formGroup]="form2">
+    <h1 mat-dialog-title>Import the file</h1>
+    <input
+      type="file"
+      #fileImportInput
+      name="File Upload"
+      id="csvFileUpload"
+      (change)="fileChangeListener($event)"
+      accept=".csv"
+    />
+
+    <ng-container *ngIf="isValidFile">
+      <hr />
+
+      <h4>Select the columns to be displayed:</h4>
+      <div formArrayName="dataValues">
+        <mat-form-field>
+          <p *ngFor="let control of checkItem.controls; let i = index">
+            <mat-checkbox
+              [formControl]="control"
+              id="inlineCheckbox{{ i }}"
+              (change)="getSelectedCheckList()"
+            >
+              {{ sampleCheckList[i] }}
+            </mat-checkbox>
+          </p>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-select name="type" placeholder="Data Type">
+            <ng-container *ngFor="let type of dataTypes">
+              <mat-option value="{{ type.id }}"> {{ type.value }} </mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <section class="example-section" [formGroup]="form2">
+        <h4>You chose:</h4>
+        {{ selectedCheckList | json }}
+      </section>
+      <button mat-raised-button mat-dialog-close color="warn">Cancel</button>
+      <button mat-raised-button color="primary" (click)="onAddFile()">
+        Save & Import
+      </button>
+    </ng-container>
+  </section>
+</div> -->
